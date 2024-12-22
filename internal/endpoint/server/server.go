@@ -22,6 +22,9 @@ func NewServer(port int, repo Repo) *Server {
 }
 
 func (s *Server) Handler(r http.ResponseWriter, req *http.Request) {
+	if req.Method != "POST" {
+		return
+	}
 	data, err := io.ReadAll(req.Body)
 	if err != nil {
 		var resp models.ErrorResponse
